@@ -29,7 +29,7 @@ namespace Launcher
       this.InitializeComponent();
       this.SuspendLayout();
 
-      // Set the embedded image of the rabbid character
+      // Set the embedded image of the rabbid picture
       this.rabbidPicture.Image = this.GetEmbededRabbid();
 
       // Populate language combo box with enum values from Configuration.Lang
@@ -102,7 +102,7 @@ namespace Launcher
 
     private Image GetEmbededRabbid()
     {
-      // Get embedded image of a rabbid from the resources
+      // Get embedded rabbid image from the resources
       return Image.FromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream("Launcher.Images.rabbid.png"));
     }
 
@@ -182,7 +182,7 @@ namespace Launcher
       this.okBtn.Name = "okBtn";
       this.okBtn.Click += new EventHandler(this.okBtn_Click);
 
-      // Configuration of the rabbid picture box
+      // Configuration of the picture box of the rabbid
       componentResourceManager.ApplyResources((object) this.rabbidPicture, "rabbidPicture");
       this.rabbidPicture.Name = "rabbidPicture";
 
