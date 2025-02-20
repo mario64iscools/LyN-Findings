@@ -17,20 +17,18 @@ namespace Launcher
 {
     public class MainForm : Form
     {
-        private IContainer components;
-        private PictureBox splashContainer;
-        private Button playBtn;
-        private Button settingsBtn;
-        private Button exitBtn;
-        private int versionIndex;
-        private Form settingsForm;
-        private static string[] splashFormats = new string[1]
-        {
-      "bmp"
-        };
-
+        private IContainer components; //holds UI componets for disposal
+        private PictureBox splashContainer; //Displays a splash image?
+        private Button playBtn; //play button
+        private Button settingsBtn; //settings button
+        private Button exitBtn; //button
+        private int versionIndex; //stores the game version index
+        private Form settingsForm; //reference to the settings window
+        private static string[] splashFormats = new string[1] {"bmp" }; //supported splash image formats??
+        
         protected override void Dispose(bool disposing)
         {
+            //disposes resources if the form is being closed
             if (disposing && this.components != null)
                 this.components.Dispose();
             base.Dispose(disposing);
@@ -38,6 +36,7 @@ namespace Launcher
 
         private void InitializeComponent()
         {
+            //initializes UI components and their properties
             ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(MainForm));
             this.splashContainer = new PictureBox();
             this.playBtn = new Button();
@@ -127,9 +126,10 @@ namespace Launcher
                 this.SetupFromSplash(image = this.GetEmbededSplash());
             this.ResumeLayout();
         }
-
+        
         public Size GetMinSplashSize()
         {
+            //calculates the minimum size for a splash image based on button dimensions
             int num1 = Math.Max(this.playBtn.Width, Math.Max(this.settingsBtn.Width, this.exitBtn.Width));
             int num2 = num1 / 4 * 5;
             return new Size(num1 * 3 + num2, 1);
@@ -137,12 +137,14 @@ namespace Launcher
 
         public bool IsValidSplash(Image splash)
         {
+            //checks if the splash image has the requirements
             Size minSplashSize = this.GetMinSplashSize();
             return splash != null && splash.Width > minSplashSize.Width && splash.Height > minSplashSize.Height;
         }
 
         public bool SetupFromSplash(Image splash)
         {
+            //adjusts the frm layout base on the splash image size
             if (!this.IsValidSplash(splash))
                 return false;
             int num1 = Math.Max(this.playBtn.Height, Math.Max(this.settingsBtn.Height, this.exitBtn.Height));
@@ -159,7 +161,7 @@ namespace Launcher
             this.exitBtn.Location = new Point(x, y);
             return true;
         }
-
+        //loads the default splash image
         private Image GetEmbededSplash()
         {
             return Image.FromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream("Launcher.Images.bunnies.png"));
